@@ -25,7 +25,7 @@ if (v.prerelease && typeof v.prerelease[0] === 'string') {
 }
 version = process.env.NWJS_INSTALL_SDK_VERSION || version;
 
-console.log("- Installing NWJS Version "+version);
+console.log("- Installing NWJS Version "+version+" from " + urlBase);
 
 if ( version.slice(-4) === '-sdk' ){
    version = version.slice(0, -4);
