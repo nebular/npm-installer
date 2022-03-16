@@ -99,12 +99,10 @@ if( parsedUrl.protocol == 'file:' ) {
   if ( !fileExistsAndAvailable(filePath) ) logError(
     'Could not find ' + filePath
   );
-  new Decompress()
-    .src( filePath )
-    .dest( dest )
-    .use( Decompress.zip(decompressOptions) )
-    .use( Decompress.targz(decompressOptions) )
-    .run( cb );
+  Decompress(filePath, dest)
+    .then( ()=>cb(null))
+    .catch (cb);
+
 } else {
   var progress = {
     total: null,
