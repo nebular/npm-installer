@@ -15,7 +15,7 @@ var chalk = require('chalk');
 var buildType = process.env.npm_config_nwjs_build_type || process.env.NWJS_BUILD_TYPE || 'normal';
 
 var v = semver.parse(require('../package.json').version);
-var version = process.env.NWJS_INSTALL_SDK_VERSION || ([v.major, v.minor, v.patch].join('.'));
+var version = ([v.major, v.minor, v.patch].join('.'));
 if (v.prerelease && typeof v.prerelease[0] === 'string') {
   var prerelease = v.prerelease[0].split('-');
   if (prerelease.length > 1) {
@@ -23,6 +23,9 @@ if (v.prerelease && typeof v.prerelease[0] === 'string') {
   }
   version += '-' + prerelease.join('-');
 }
+version = process.env.NWJS_INSTALL_SDK_VERSION || version;
+
+logError("- Installing NWJS Version "+version);
 
 if ( version.slice(-4) === '-sdk' ){
    version = version.slice(0, -4);
